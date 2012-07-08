@@ -12,6 +12,8 @@ import org.apache.log4j.Logger;
 
 public class CaffeineStarter {
 
+	//Because this project should not be included as a dependency. I skip the deep package hiearchy.
+	
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
 		Logger.getRootLogger().setLevel(Level.DEBUG);
