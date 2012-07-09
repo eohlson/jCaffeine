@@ -24,8 +24,8 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 
 import caffeine.resource.CaffeineConfiguration;
-import caffeine.resource.CaffeineResources;
 import caffeine.resource.CaffeineConfiguration.FunctionKeys;
+import caffeine.resource.CaffeineResources;
 
 
 public class CaffeineMain {
@@ -41,7 +41,7 @@ public class CaffeineMain {
 	private boolean storeConfigOnClose = false;
 
 	public CaffeineMain() {
-		// Setting up default
+		// Setting up default F18 every 60 second
 		configuration = new CaffeineConfiguration(FunctionKeys.F18, 60);
 
 		resources = new CaffeineResources();
@@ -56,7 +56,6 @@ public class CaffeineMain {
 			throw new RuntimeException(e);
 		}
 
-		settingsDialogue();
 	}
 
 	private TrayIcon createCaffeineTrayIcon(final CaffeineResources resources) {
@@ -119,15 +118,20 @@ public class CaffeineMain {
 		});
 		
 		popup.add(settings);
-		popup.add(storeConfigOnClose);
+//		popup.add(storeConfigOnClose);
 		popup.addSeparator();
 		popup.add(exit);
 
 		return popup;
 	}
 
+	private void restartClicking() {
+		stopClicking();
+		startClicking();
+	}
+	
 	private void startClicking() {
-		pressButtonThread = new PressButtonThread(configuration);
+		pressButtonThread = new PressButtonThread(new CaffeineConfiguration(configuration));
 		pressButtonThread.start();
 	}
 
@@ -161,8 +165,7 @@ public class CaffeineMain {
 				
 				configuration.updateWithNewValues(newConfiguration);
 				
-				stopClicking();
-				startClicking();
+				restartClicking();
 				
 				frame.setVisible(false);
 				frame.dispose();

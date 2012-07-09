@@ -38,6 +38,10 @@ public class CaffeineConfiguration {
 		this.intervalInSeconds = intervalInSeconds;
 	}
 
+	public CaffeineConfiguration(CaffeineConfiguration configuration) {
+		this(configuration.getButton(), configuration.getIntervalInSeconds());
+	}
+
 	public void updateWithNewValues(CaffeineConfiguration config) {
 		this.button = config.getButton();
 		this.intervalInSeconds = config.getIntervalInSeconds();
