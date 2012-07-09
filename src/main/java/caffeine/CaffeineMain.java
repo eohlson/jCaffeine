@@ -132,7 +132,9 @@ public class CaffeineMain {
 	}
 
 	private void stopClicking() {
-		pressButtonThread.stopRunning();
+		if (pressButtonThread != null)  {
+			pressButtonThread.stopRunning();
+		}
 	}
 
 	private void settingsDialogue() {
